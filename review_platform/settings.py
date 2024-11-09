@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['new-books-backend-3c4d25dea9f8.herokuapp.com']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOST')
 
 
 # Application definition
