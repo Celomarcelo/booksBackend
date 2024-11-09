@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOST')
+ALLOWED_HOSTS = ['new-books-backend-3c4d25dea9f8.herokuapp.com']
 
 
 # Application definition
@@ -68,14 +68,12 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", 
-    "https://new-books-frontend-fea3df7794e6.herokuapp.com/", 
+    "new-books-frontend-fea3df7794e6.herokuapp.com", 
 ]
 
-CORS_ALLOW_HEADERS = [
-    'authorization',
-    'content-type',
-    'x-requested-with',
-]
+CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
