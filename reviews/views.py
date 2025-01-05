@@ -386,3 +386,27 @@ def delete_comment(request, comment_id):
 
     comment.delete()
     return Response({"message": "Comment deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+
+# API view to edit a specific comment by its ID
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_comment(request, comment_id):
+    try:
+        comment = Comment.objects.get(id=comment_id, user=request.user)
+    except Comment.DoesNotExist:
+        return Response(
+            {"error": "Comment not found or you don't have permission to edit this comment."},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    content = request.data.get('content', '').strip()
+
+    if not content:
+        return Response({"error": "Content field is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+    comment.content = content
+    comment.save()
+
+    serializer = CommentSerializer(comment)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
